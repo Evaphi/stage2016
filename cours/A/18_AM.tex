@@ -1,9 +1,219 @@
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent feugiat tortor ex, id lacinia dui posuere vitae. Sed ultrices pulvinar urna, eu posuere nunc suscipit non. Aenean lacus arcu, dignissim vitae sapien a, gravida hendrerit turpis. Ut et molestie ligula. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque rutrum eros quis neque dictum sollicitudin. Aliquam hendrerit mi non nisi tempor condimentum. Vivamus nunc diam, vestibulum sed risus eu, molestie consectetur mi. Donec consectetur ut nulla a molestie. Nunc interdum augue eros, non pharetra justo dignissim eu. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer et nibh nibh. Sed pharetra lacus ut ex congue, vitae lacinia ipsum accumsan. Sed mollis neque quis elementum vulputate. Duis dolor nisi, malesuada vel lorem ac, accumsan sollicitudin nisi.
+\subsubsection{Principe de r\'ecurrence}
 
-Vivamus sit amet ante ac turpis cursus rhoncus id vel libero. Nulla facilisi. Donec maximus, massa ac dapibus lacinia, enim nibh maximus ligula, id varius erat turpis in libero. Sed eget neque scelerisque, lobortis erat eu, varius magna. Morbi sodales est a ipsum volutpat, at ultricies nisl dapibus. Pellentesque interdum nec lectus sed pulvinar. Vivamus finibus est in tortor imperdiet, sit amet consequat turpis aliquet. Duis cursus sollicitudin magna, eu condimentum nibh convallis in. Praesent rhoncus porta tempor. Quisque pellentesque ultricies nisi quis vehicula.
 
-Suspendisse in lacus ac velit rutrum sagittis. Vivamus at volutpat quam. Quisque id erat dui. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent id augue felis. Proin convallis odio interdum purus malesuada tempus. Fusce eget libero non erat pulvinar molestie at ut augue. Sed suscipit turpis non malesuada cursus. Suspendisse imperdiet et neque vel rhoncus.
+\paragraph{Introduction.}
+La r\'ecurrence est un principe de raisonnement math\'ematique, utile dans de nombreux domaines, notamment en combinatoire et en arithm\'etique.
 
-Sed accumsan sodales eros vel sagittis. In nec nisl vitae ligula aliquam pharetra. Fusce enim massa, vehicula dapibus ultricies sit amet, dignissim eget purus. Sed sodales ligula cursus vulputate venenatis. Praesent sed dignissim odio. Maecenas maximus at mi ut sagittis. Cras in sem vel ipsum dapibus gravida sit amet vitae turpis. Sed porta erat at nisl auctor commodo.
+Elle s'appuie sur l'id\'ee que l'on peut parcourir l'ensemble des entiers naturels $\N$ de la mani\`ere suivante : 
+on part de $0$, puis on va en $0+1=1$, puis en $1+1=2$, puis en $2+1=3$... 
+et ainsi de suite : \`a  chaque fois qu'on se trouve en un entier donn\'e $n$ (autrement dit, \`a  chaque fois qu'on se place au rang $n$), on peut aller \`a  l'entier suivant, qui sera $n+1$.
 
-Donec urna nulla, fringilla ac iaculis ac, lobortis vel leo. Vivamus ac elit neque. Praesent varius leo quis ante condimentum, vel hendrerit diam auctor. Praesent elementum urna vel diam vulputate tincidunt. Vivamus at erat vel magna molestie ultrices. Suspendisse nec nisi a nibh pellentesque bibendum ac et purus. Praesent mollis ultricies dui eu cursus. Nam posuere consequat massa, nec semper lacus. Pellentesque rhoncus enim non nisi iaculis iaculis. Vivamus facilisis velit sed urna porttitor, nec commodo nulla aliquam. Aliquam dapibus faucibus pulvinar.
+\paragraph{D\'efinitions et notations.}
+Ce qui est alors int\'eressant, c'est qu'on peut d\'efinir des objets qui d\'ependent de notre entier $n$. Par exemple, on peut proc\'eder ainsi : \`a  chaque fois qu'on se place en un entier $n$, on choisit un nombre et on dit qu'on l'associe \`a  notre entier $n$. Pour bien souligner cette association entre le nombre choisi et l'entier $n$ sur lequel on \'etait plac\'e lorsqu'on a choisi le nombre, on note $u_n$ le nombre associ\'e \`a  l'entier $n$.
+
+Quand on regarde $u_0$, puis $u_1$, puis $u_2$,\ldots, et ainsi de suite tous les $u_n$ que l'on a d\'efinis, on d\'efinit en fait une suite de nombres, not\'ee en l'occurrence $(u_n)$. Il ne faut pas confondre la suite, not\'ee $(u_n)$, qui est la succession de tous les nombres, et le terme de la suite au rang $n$, not\'e $u_n$, qui n'est qu'un seul nombre.
+
+Enfin, on peut aussi proc\'eder ainsi : \`a  chaque fois que l'on se place en un entier $n$, on choisit non pas un nombre, mais une propri\'et\'e ; autrement dit, on associe \`a  chaque entier $n$ une propri\'et\'e. On note alors ${\cal P}_n$ la propri\'et\'e associ\'ee \`a  l'entier $n$.
+
+Une telle propri\'et\'e peut \^etre {\it a priori} vraie ou fausse. Dans la pratique, on s'int\'eresse surtout aux propri\'et\'es vraies et g\'en\'erales : on veut souvent que la propri\'et\'e ${\cal P}_n$ reste vraie lorsque l'on remplace $n$ par n'importe quel entier naturel (par exemple, ${\cal P}_n$ : "$n$ est pair" est fausse pour $n=3$ mais la propri\'et\'e ${\cal P}_n$ : "Si $n$ est pair, alors $n^2$ est pair et si $n$ est impair, alors $n^2$ est impair" est vraie pour tout entier $n$).
+
+\paragraph{Principe de r\'ecurrence.}
+Consid\'erons une propri\'et\'e {\it d\'ependant} d'un entier $n$, not\'ee ${\cal P}_n$.
+
+Pour montrer que ${\cal P}_n$ est vraie {\it pour tout} $n$ , on peut s'appuyer sur la description pr\'ec\'edente de $\N$. Ainsi, on peut repr\'esenter la situation par un escalier, dont la $n$-i\`eme marche correspond
+\`a  la propri\'et\'e ${\cal P}_n$.
+
+\begin{itemize}
+
+\item[$\triangleright$] On commence par v\'erifier que la propri\'et\'e $P_0$ est vraie (l'escalier repose sur un sol ferme !).
+\item[$\triangleright$] Ensuite, on d\'emontre que : si la propri\'et\'e est vraie pour un entier donn\'e $n$, 
+alors elle est encore vraie pour l'entier suivant $n+1$ (d'une marche \`a  l'autre, il n'y a qu'un pas\ldots \`a  franchir !). Utiliser le principe de r\'ecurrence pr\'esente donc l'int\'er\^et de pouvoir utiliser l'information fournie par ${\cal P}_n$ pour prouver ${\cal P}_{n+1}$.
+
+\end{itemize}
+
+
+\begin{center}
+
+\definecolor{aqaqaq}{rgb}{0.6274509803921569,0.6274509803921569,0.6274509803921569}
+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1.0cm,y=1.0cm]
+\clip(-1.0,-1.0) rectangle (6.0,6.1);
+\fill[color=aqaqaq,fill=aqaqaq,fill opacity=1.0] (-1.0,0.0) -- (-1.0,-0.2) -- (6.0,-0.2) -- (6.0,0.0) -- cycle;
+\draw [line width=1.2pt] (-1.0,0.0)-- (0.0,0.0);
+\draw [line width=1.2pt] (0.0,0.0)-- (0.0,1.0);
+\draw [line width=1.2pt] (0.0,1.0)-- (1.0,1.0);
+\draw [line width=1.2pt] (1.0,1.0)-- (1.0,2.0);
+\draw [line width=1.2pt] (1.0,2.0)-- (2.0,2.0);
+\draw [line width=1.2pt,dotted] (2.0,2.0)-- (2.0,3.0);
+\draw [line width=1.2pt,dotted] (2.0,3.0)-- (3.0,3.0);
+\draw [line width=1.2pt] (3.0,3.0)-- (3.0,4.0);
+\draw [line width=1.2pt] (3.0,4.0)-- (4.0,4.0);
+\draw [line width=1.2pt] (4.0,4.0)-- (4.0,5.0);
+\draw [line width=1.2pt] (4.0,5.0)-- (5.0,5.0);
+\draw [line width=1.2pt,dotted] (5.0,5.0)-- (5.0,6.0);
+\draw [line width=1.2pt,dotted] (5.0,6.0)-- (6.0,6.0);
+\draw (-0.7466666666666668,-0.1333333333333349) node[anchor=north west] {$\textcolor{blue}{{\cal P}_0}$};
+\draw (0.2333333333333349,0.7466666666666668) node[anchor=north west] {${\cal P}_1$};
+\draw (1.2333333333333349,1.7466666666666668) node[anchor=north west] {${\cal P}_2$};
+\draw (3.2333333333333349,3.7466666666666668) node[anchor=north west] {$\textcolor{blue}{{\cal P}_{n}}$};
+\draw (4.1,4.7466666666666668) node[anchor=north west] {$\textcolor{blue}{{\cal P}_{n+1}}$};
+\end{tikzpicture}
+
+{\textsc{Figure.--} Escalier de r\'ecurrence}
+
+\end{center}
+
+
+Plus formellement, un raisonnement par r\'ecurrence se r\'edige ainsi :\\
+
+
+On consid\`ere, pour $n\in\N$, la propri\'et\'e ${\cal P}_n$ : \og ... \fg.
+ 
+Montrons par r\'ecurrence que ${\cal P}_n$ est vraie pour tout $n\in\N$.
+
+\begin{itemize}
+
+\item[$\triangleright$]
+\underline{Initialisation} : 
+on v\'erifie que la propri\'et\'e ${\cal P}_0$ est vraie.
+
+\item[$\triangleright$]
+\underline{H\'er\'edit\'e} : 
+on suppose qu'il existe un entier naturel $n$ tel que la propri\'et\'e ${\cal P}_n$ est vraie (c'est \emph{l'hypoth\`ese de r\'ecurrence}). 
+On montre qu'alors la propri\'et\'e ${\cal P}_{n+1}$ est aussi vraie, en utilisant l'hypoth\`ese de r\'ecurrence.
+
+\end{itemize}
+
+
+
+\bigskip
+
+\begin{exo}
+Soit $n$ un entier naturel. On cherche à exprimer la somme $S_n = 0+1+2+...+n$ autrement (une formule plus simple, qui permette des calculs plus rapides). Certains connaissent d\'ejà la formule $S_n = \frac{n(n+1)}{2}$. Cette formule ne sort pas de nulle part, elle peut se trouver de mani\`ere astucieuse mais pour l'instant contentons-nous de la prouver par r\'ecurrence, avec une r\'edaction la plus propre possible.
+\end{exo}
+
+\begin{sol}
+Pour $n$ un entier naturel, on note ${\cal P}_n$ la propri\'et\'e : "$S_n =  \frac{n(n+1)}{2}$".
+
+\begin{itemize}
+
+\item[$\triangleright$]
+\underline{Initialisation} : 
+Pour $n=0$, on a $S_0 =0$ et $\frac{0(0+1)}{2}=0$ donc ${\cal P}_0$ est vraie.
+
+\item[$\triangleright$]
+\underline{H\'er\'edit\'e} : 
+Soir $n$ un entier naturel tel que la propri\'et\'e ${\cal P}_n$ est vraie. 
+On a alors :
+\begin{align*}
+S_{n+1} &= 0+1+...+n+(n+1)& \\
+	     &=S_n + (n+1)& \\
+	     &=\frac{n(n+1)}{2} + (n+1) & {\text {(par hypoth\`ese de r\'ecurrence)}}\\
+	     &= \frac{n(n+1) + 2(n+1)}{2}& \\
+	&= \frac{(n+1)(n+2)}{2}& 
+\end{align*}
+
+L'\'egalit\'e $S_{n+1} = \frac{(n+1)(n+2)}{2}$ montre exactement que la propri\'et\'e ${\cal P}_{n+1}$ est vraie.
+
+\item[$\triangleright$]
+\underline {Conclusion} :
+Grâce au principe de r\'ecurrence, on a montr\'e que l'\'egalit\'e $0+1+ ...+n =  \frac{n(n+1)}{2}$ est vraie pour tout entier $n$.
+
+\end{itemize}
+\end{sol}
+\begin{exo}
+
+Soit $n\ge 1$ un entier. On trace $n$ cercles dans le plan. Montrer qu'on peut colorier chaque r\'egion du plan ainsi d\'elimit\'ee avec exactement deux couleurs (\textcolor{blue!70}{bleu} et \textcolor{red!80}{rouge} en l'occurrence) de mani\`ere \`a  ce que deux r\'egions s\'epar\'es par un arc de cercle soient toujours de couleur diff\'erente.
+
+\def\firstcircle{(0,0) circle (1.5)}
+\def\secondcircle{(2,-1) circle (2)}
+\def\thirdcircle{(1.5,0.5) circle (1)}
+
+\begin{center}
+
+\begin{tikzpicture}
+
+    \draw \firstcircle;
+    \draw \secondcircle;
+    \draw \thirdcircle;
+    
+    \begin{scope}[even odd rule]
+         \clip \secondcircle (-2,-3.5) rectangle (4.5,2); 
+         \clip \thirdcircle (-2,-3.5) rectangle (4.5,2);
+         \clip \firstcircle (-2,-3.5) rectangle (4.5,2);
+     \fill[pattern=north east lines, pattern color=red] (-2,-3.5) rectangle (4.5,2);
+     \end{scope}
+
+    \begin{scope}[even odd rule]
+         \clip \secondcircle (-2,-3.5) rectangle (4.5,2); 
+         \clip \thirdcircle (-2,-3.5) rectangle (4.5,2);
+     \fill[pattern=north west lines, pattern color=blue] \firstcircle;
+     \end{scope}
+     
+     \begin{scope}[even odd rule]
+         \clip \firstcircle (-2,-3.5) rectangle (4.5,2);
+         \clip \thirdcircle (-2,-3.5) rectangle (4.5,2);
+     \fill[pattern=north west lines, pattern color=blue] \secondcircle;
+     \end{scope}
+     
+     \begin{scope}[even odd rule]
+         \clip \secondcircle (-2,-3.5) rectangle (4.5,2);
+         \clip \firstcircle (-2,-3.5) rectangle (4.5,2);
+     \fill[pattern=north west lines, pattern color=blue] \thirdcircle;
+     \end{scope}
+    
+    \begin{scope}[even odd rule]
+      \clip \thirdcircle;
+      \clip \secondcircle  (-2,-3.5) rectangle (4.5,2);
+      \fill[pattern=north east lines, pattern color=red] \firstcircle;
+    \end{scope}
+    
+    \begin{scope}[even odd rule]
+      \clip \secondcircle;
+      \clip \firstcircle  (-2,-3.5) rectangle (4.5,2);
+      \fill[pattern=north east lines, pattern color=red] \thirdcircle;
+    \end{scope}
+    
+    \begin{scope}[even odd rule]
+      \clip \firstcircle;
+      \clip \thirdcircle  (-2,-3.5) rectangle (4.5,2);
+      \fill[pattern=north east lines, pattern color=red] \secondcircle;
+    \end{scope}
+
+    \begin{scope}
+      \clip \firstcircle;
+      \clip \secondcircle;
+      \fill[pattern=north west lines, pattern color=blue] \thirdcircle;
+    \end{scope}
+    
+\end{tikzpicture}
+
+{\textsc{Figure.--} Exemple de coloriage possible pour $n=3$ cercles}
+
+\end{center}
+
+\end{exo}
+
+\begin{sol}
+
+Si l'on n'a qu'un seul cercle, on colorie l'int\'erieur d'une couleur arbitraire, l'ext\'erieur de l'autre couleur et c'est gagn\'e.
+
+Si on peut toujours colorier $n$ cercles comme voulu, qu'en est-il de $n+1$ cercles ? Pour colorier les r\'egions comme voulu, on oublie tout d'abord un cercle : il en reste alors $n$, et on peut colorier les r\'egions correspondantes comme voulu, par hypoth\`ese de r\'ecurrence. Puis on rajoute le cercle oubli\'e. Il coupe en deux certaines r\'egions colori\'ees : on change alors la couleur de chaque r\'egion coloriage \`a  l'int\'erieur de notre cercle, et on garde la couleur initiale pour les autres r\'egions.
+
+Alors, on a bien colori\'e toutes nos r\'egions comme voulu ! En effet, c'est gagn\'e quand on regarde deux r\'egions s\'epar\'ees par un arc du cercle oubli\'e (gr\^ace au changement qu'on a fait), mais aussi quand on regarde deux r\'egions s\'epar\'ees par un arc d'un autre cercle (par hypoth\`ese de r\'ecurrence).
+
+\end{sol}
+
+
+\begin{exo}
+Pour monter les escaliers, Evariste sait faire des pas de $1$ marche et des pas de $2$ marches. De combien de mani\`eres diff\'erentes peut-il monter un escalier à $n$ marches ?
+\end{exo}
+
+\begin{sol}
+Pour commencer, notons $u_n$ le nombre cherch\'e. L'\'enonc\'e semble demander une formule explicite pour $u_n$, mais avant cela cherchons ce qu'on appelle une \emph{relation de r\'ecurrence}, c'est-à-dire une expression de $u_n$ en fonction des termes $u_k$ pr\'ec\'edents ($k < n$).
+
+Pour $n\geq 2$ on distingue deux cas : soit Evariste commence par un pas de $1$ marche, dans ce cas il a $u_{n-1}$ mani\`eres de monter les $n-1$ marches restantes ; soit il commence par un pas de $2$ marches et il a $u_{n-2}$ possibilit\'es pour finir l'escalier. Ainsi, on obtient la relation $u_n = u_{n-1}+u_{n-2}$.
+
+Comme cette relation de r\'ecurrence fait intervenir les deux termes pr\'ec\'edant $u_n$, il faut initialiser notre suite avec les deux premiers termes. Quand il y a $0$ ou $1$ marches, Evariste n'a qu'une seule mani\`ere d'avancer. On a donc $u_0=1$ et $u_1=1$.
+
+Il se trouve que la suite ainsi d\'efinie est une suite de r\'ecurrence bien connue : la fameuse suite de Fibonacci ! Je laisse les lecteurs d\'esireux d'en savoir plus se renseigner par eux-m\^emes, \'etablir la formule explicite de $u_n$ ou retrouver la construction du nombre d'or à la r\`egle et au compas...
+\end{sol}
